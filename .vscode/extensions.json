@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "angular.ng-template",
+    "angular.angular-language-service",
+    "esbenp.prettier-vscode",
+    "tailwindcss.vscode-tailwindcss",
+    "bradlc.vscode-tailwindcss"
+  ]
+}
