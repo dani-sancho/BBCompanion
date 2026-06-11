@@ -5,9 +5,8 @@ import Dexie, { Table } from 'dexie';
 // You should replace this with your actual domain models later.
 export interface SyncQueueItem {
   id?: number;
-  operation: 'CREATE' | 'UPDATE' | 'DELETE';
-  payload: unknown;
   createdAt: number;
+  payload: unknown;
 }
 
 @Injectable({
@@ -16,7 +15,7 @@ export interface SyncQueueItem {
 export class AppDatabase extends Dexie {
   // Define tables here. The generic type represents the model, and the second type is the primary key.
   // Note: Since each device has its own IndexedDB, this data is strictly local.
-  syncQueue!: Table<SyncQueueItem, number>;
+  usuarios!: Table<SyncQueueItem, number>;
 
   constructor() {
     // The name of the database

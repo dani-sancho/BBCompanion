@@ -1,0 +1,8 @@
+@for (item of config(); track item.id) {
+    <div [class]="typeClasses()" 
+        (click)="onClickItem(item)">
+        <div class="font-bold">{{ item.name }}</div>
+        <div class="text-zinc-300 opacity-70">{{ item.category }}</div>
+        <div class="text-zinc-300 opacity-70">{{ item.dueDate }}</div>
+    </div>
+}
