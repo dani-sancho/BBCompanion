@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ItemDisplay } from '../../components/item-display/item-display';
 import { itemDisplayConfig } from '../../components/item-display/item-display.interface';
+import { Modal } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ItemDisplay],
+  imports: [ItemDisplay, Modal],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
@@ -27,4 +28,6 @@ export class Dashboard {
   ola(item: itemDisplayConfig) {
     console.log(item);
   }
+
+  isModalOpen = false;
 }

@@ -2,3 +2,8 @@
 
 <app-item-display [config]="itemsDisplay" (itemHandler)="ola($event)" />
 
+<button (click)="isModalOpen = true">Añadir alimento</button>
+
+<app-modal title="Añadir alimento" [open]="isModalOpen" (isClosed)="isModalOpen = false">
+  <p>Comprobando que se ve el modal</p>
+</app-modal>
