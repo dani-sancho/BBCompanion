@@ -3,6 +3,8 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
+import { FoodItemRepository } from './domain/repositories/food-item.repository';
+import { FoodItemRepositoryImpl } from './data/repositories/food-item.repository.impl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +18,9 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    {
+      provide: FoodItemRepository,
+      useExisting: FoodItemRepositoryImpl
+    }
   ],
 };
