@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ItemDisplay } from '../../components/item-display/item-display';
 import { itemDisplayConfig } from '../../components/item-display/item-display.interface';
+
+import { GetFoodItemsUseCase } from '../../../domain/use-cases/get-food-items.use-case';
+import { SaveFoodItemsUseCase } from '../../../domain/use-cases/save-food-items.use-case copy';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +11,9 @@ import { itemDisplayConfig } from '../../components/item-display/item-display.in
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
+
+  private readonly getFoodItemsUseCase: GetFoodItemsUseCase = inject(GetFoodItemsUseCase);
+  private readonly saveFoodItemsUseCase: SaveFoodItemsUseCase = inject(SaveFoodItemsUseCase);
 
   itemsDisplay: itemDisplayConfig[] = [
     {
@@ -25,6 +31,31 @@ export class Dashboard {
   ];
 
   ola(item: itemDisplayConfig) {
-    console.log(item);
+    this.saveFoodItemsUseCase.execute({
+      id: 0,
+      name: item.name,
+      category: {
+        name: item.category
+      },
+      brand: {
+        name: 'test'
+      },
+      location: {
+        name: 'test'
+      },
+      quantity: 1,
+      bestBefore: item.dueDate,
+    }).then(() => {
+      console.log('vamos ninio');
+      this.getAllItems();
+    });
+
+
+  }
+
+  getAllItems() {
+    this.getFoodItemsUseCase.execute().then((items) => {
+      console.log(items);
+    });
   }
 }
