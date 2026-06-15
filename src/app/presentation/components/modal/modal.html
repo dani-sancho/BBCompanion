@@ -1,0 +1,38 @@
+@if (open) {
+  <!-- Backdrop -->
+  <div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm" (click)="close()">
+    <!-- Modal -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-gray-950 border border-cyan-400 rounded-xl shadow-[0_0_30px_rgba(0,255,255,0.3)]"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between px-5 py-4 border-b border-cyan-400/40">
+        <h2 class="text-base font-medium text-cyan-300 tracking-widest uppercase">
+          {{ title }}
+        </h2>
+        <button
+          (click)="close()"
+          class="text-cyan-500 hover:text-cyan-200 hover:shadow-[0_0_8px_rgba(0,255,255,0.8)] transition-all duration-200"
+          aria-label="Cerrar modal"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Content -->
+      <div class="px-5 py-4 text-cyan-100">
+        <ng-content />
+      </div>
+    </div>
+  </div>
+}
