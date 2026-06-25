@@ -50,6 +50,8 @@
 
   /* Sand red dark */
   --color-sand-red-dark: #2B1714;
+
+  /* Specific colors to be displayed on top of sand-yellow/sand-red */
   --color-text-on-yellow-light: #2A241C;
   --color-text-on-yellow-dark:  #F3EDE2;
   --color-text-on-red-light: #2A1B18;
