@@ -1,3 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@theme {
+  /* Background */
+  --color-sand-50: #F4EFE3;
+
+  /* Items */
+  --color-sand-100: #FAF7ED;
+
+  /* Hover light */
+  --color-sand-200: #E9E3D2;
+
+  /* Icon background light */
+  --color-sand-250: #EBE3D1;
+
+  /* Borders light */
+  --color-sand-300: #DBD3BE;
+
+  /* Item hover dark */
+  --color-sand-400: #4E412B;
+
+  /* Borders dark */
+  --color-sand-800: #2B261D;
+
+  /* Items dark */
+  --color-sand-900: #221C14;
+
+  /* Hover dark */
+  --color-sand-950: #0F0C08;
+
+  /* Background dark */
+  --color-sand-975: #1A1611;
+
+  /* Brick light */
+  --color-brick-light: #c9542b;
+
+  /* Brick dark */
+  --color-brick-dark: #c9542b;
+
+  /* Sand yellow */
+  --color-sand-yellow: #F3E2B8;
+
+  /* Sand yellow dark */
+  --color-sand-yellow-dark: #2A2416;
+
+  /* Sand red */
+  --color-sand-red: #E8B4A8;
+
+  /* Sand red dark */
+  --color-sand-red-dark: #2B1714;
+  --color-text-on-yellow-light: #2A241C;
+  --color-text-on-yellow-dark:  #F3EDE2;
+  --color-text-on-red-light: #2A1B18;
+  --color-text-on-red-dark:  #F3EDE2;
+}
