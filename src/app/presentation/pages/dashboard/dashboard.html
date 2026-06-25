@@ -1,6 +1,16 @@
-<p>dashboard works!</p>
-
-<app-item-display [config]="itemsDisplay" (itemHandler)="ola($event)" />
+@for (section of sections(); track section.title) {
+  @defer (when section.data().length > 0) {
+    <app-item-display
+      [config]="section.data()"
+      (itemHandler)="ola($event)"
+      type="block"
+      [title]="section.title"
+    />
+  } @placeholder {
+    <!-- TODO: Use a list Skeleton maybe? -->
+    <p>Cargando...</p>
+  }
+}
 
 <button (click)="isModalOpen = true">Añadir alimento</button>
 

@@ -7,44 +7,55 @@ import { BrandDataSource } from '../datasources/brand.datasource';
 import { CategoryDataSource } from '../datasources/category.datasource';
 import { LocationDataSource } from '../datasources/location.datasource';
 import { Brand, Category, FoodItem, Location } from '../../domain/models/food-item.model';
+import { ExpiryStatusService } from '../../domain/services/date/expiry-status.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FoodItemRepositoryImpl extends FoodItemRepository {
-
   private foodDS: FoodItemDataSource = inject(FoodItemDataSource);
   private brandDS: BrandDataSource = inject(BrandDataSource);
   private categoryDS: CategoryDataSource = inject(CategoryDataSource);
   private locationDS: LocationDataSource = inject(LocationDataSource);
+  private expiryStatusService = inject(ExpiryStatusService);
 
   async getAll(): Promise<FoodItem[]> {
-
     const foodItems = await this.foodDS.getAll();
     const brands = await this.brandDS.getAll();
     const categories = await this.categoryDS.getAll();
     const locations = await this.locationDS.getAll();
 
-    const categoryMap = new Map<number, string>(categories.map(category => [category.id, category.name]));
-    const brandMap = new Map<number, string>(brands.map(brand => [brand.id, brand.name]));
-    const locationMap = new Map<number, string>(locations.map(location => [location.id, location.name]));
+    const categoryMap = new Map<number, string>(
+      categories.map((category) => [category.id, category.name]),
+    );
+    const brandMap = new Map<number, string>(brands.map((brand) => [brand.id, brand.name]));
+    const locationMap = new Map<number, string>(
+      locations.map((location) => [location.id, location.name]),
+    );
 
-    return foodItems.map(food => {
-
+    return foodItems.map((food) => {
       const category: Category = {
         name: categoryMap.get(food.category) ?? '',
-        id: food.category
+        id: food.category,
       };
 
       const brand: Brand = {
         id: food.brand,
-        name: brandMap.get(food.brand) ?? ''
+        name: brandMap.get(food.brand) ?? '',
       };
 
       const location: Location = {
         id: food.location,
-        name: locationMap.get(food.location) ?? ''
+        name: locationMap.get(food.location) ?? '',
       };
+
+      let expiryDate = food.bestBefore;
+      if (food.openedDate) {
+        expiryDate = new Date(food.openedDate);
+        expiryDate.setDate(expiryDate.getDate() + 3);
+      }
+
+      const dateStatus = this.expiryStatusService.getStatus(expiryDate);
 
       return {
         id: food.id,
@@ -54,7 +65,8 @@ export class FoodItemRepositoryImpl extends FoodItemRepository {
         location: location,
         quantity: food.quantity,
         bestBefore: food.bestBefore,
-        openedDate: food.openedDate
+        openedDate: food.openedDate,
+        dateStatus: dateStatus,
       };
     });
   }
@@ -74,7 +86,7 @@ export class FoodItemRepositoryImpl extends FoodItemRepository {
       quantity: item.quantity,
       openedDate: item.openedDate,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
     return await db.foodItem.add(entity);
   }
@@ -86,17 +98,16 @@ export class FoodItemRepositoryImpl extends FoodItemRepository {
   async deleteItem(id: number): Promise<void> {
     return await db.foodItem.delete(id);
   }
-  
-  
+
   async getExpiredItems(): Promise<FoodItemEntity[]> {
     const foodItems = await this.foodDS.getAll();
-    return foodItems.filter(food => food.bestBefore < new Date());
+    return foodItems.filter((food) => food.bestBefore < new Date());
   }
 
   async getByBrand(brandId: number): Promise<Brand[]> {
     const brandName = await this.brandDS.getItem(brandId);
 
-    if(!brandName || !brandName.name) {
+    if (!brandName || !brandName.name) {
       return [];
     }
 
@@ -106,7 +117,7 @@ export class FoodItemRepositoryImpl extends FoodItemRepository {
   async getByCategory(categoryId: number): Promise<Category[]> {
     const categoryName = await this.categoryDS.getItem(categoryId);
 
-    if(!categoryName || !categoryName.name) {
+    if (!categoryName || !categoryName.name) {
       return [];
     }
 
@@ -116,7 +127,7 @@ export class FoodItemRepositoryImpl extends FoodItemRepository {
   async getByLocation(locationId: number): Promise<Location[]> {
     const locationName = await this.locationDS.getItem(locationId);
 
-    if(!locationName || !locationName.name) {
+    if (!locationName || !locationName.name) {
       return [];
     }
 
