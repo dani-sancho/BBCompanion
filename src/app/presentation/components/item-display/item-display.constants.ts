@@ -52,7 +52,7 @@ export const itemDisplayIcon = {
       dark:text-text-on-red-dark
     `,
     2: `
-      bg-sand-250
+      bg-sand-350
       dark:bg-sand-950
     `,
   } as Record<number, string>,

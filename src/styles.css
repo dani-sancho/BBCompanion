@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   /* Background */
@@ -12,11 +13,11 @@
   /* Hover light */
   --color-sand-200: #E9E3D2;
 
-  /* Icon background light */
-  --color-sand-250: #EBE3D1;
-
   /* Borders light */
   --color-sand-300: #DBD3BE;
+
+  /* Icon background light */
+  --color-sand-350: #C9BEA3;
 
   /* Item hover dark */
   --color-sand-400: #4E412B;
@@ -40,16 +41,16 @@
   --color-brick-dark: #c9542b;
 
   /* Sand yellow */
-  --color-sand-yellow: #F3E2B8;
+  --color-sand-yellow: #DCC58E;
 
   /* Sand yellow dark */
-  --color-sand-yellow-dark: #2A2416;
+  --color-sand-yellow-dark: #6A582B;
 
   /* Sand red */
-  --color-sand-red: #E8B4A8;
+  --color-sand-red: #C99184;
 
   /* Sand red dark */
-  --color-sand-red-dark: #2B1714;
+  --color-sand-red-dark: #4D2A24;
 
   /* Specific colors to be displayed on top of sand-yellow/sand-red */
   --color-text-on-yellow-light: #2A241C;
