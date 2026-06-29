@@ -17,3 +17,15 @@
 <app-modal title="Añadir alimento" [open]="isModalOpen" (isClosed)="isModalOpen = false">
   <p>Comprobando que se ve el modal</p>
 </app-modal>
+
+
+<br>
+<br>
+<br>
+<mat-form-field [hideRequiredMarker]="true" [floatLabel]="'always'">
+  <input matInput placeholder="Simple placeholder" required />
+</mat-form-field>
+
+<br>
+
+<button matButton="filled" (click)="changeTheme()">dark</button>

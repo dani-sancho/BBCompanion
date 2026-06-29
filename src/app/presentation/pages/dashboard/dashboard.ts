@@ -6,15 +6,19 @@ import { Modal } from '../../components/modal/modal';
 import { GetFoodItemsUseCase } from '../../../domain/use-cases/get-food-items.use-case';
 import { SaveFoodItemsUseCase } from '../../../domain/use-cases/save-food-items.use-case copy';
 import { itemIconEnum } from '../../components/item-display/item-display.constants';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ItemDisplay, Modal],
+  imports: [ItemDisplay, Modal, MatInputModule, MatButtonModule],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
   private readonly getFoodItemsUseCase: GetFoodItemsUseCase = inject(GetFoodItemsUseCase);
   private readonly saveFoodItemsUseCase: SaveFoodItemsUseCase = inject(SaveFoodItemsUseCase);
+
+  isModalOpen = false;
 
   expiredItems = computed(() => {
     return this.itemsDisplay()?.filter((item) => item.dateStatus === 0) || [];
@@ -168,5 +172,7 @@ export class Dashboard {
     });
   }
 
-  isModalOpen = false;
+  changeTheme() {
+    document.body.classList.toggle('dark');
+  }
 }

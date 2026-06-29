@@ -1,0 +1,104 @@
+@use '@angular/material' as mat;
+
+/* =========================================================
+   THEME BASE
+========================================================= */
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$orange-palette,
+    tertiary: mat.$yellow-palette
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$orange-palette,
+    tertiary: mat.$yellow-palette
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+/* =========================================================
+   APPLY THEMES
+========================================================= */
+html {
+  @include mat.all-component-themes($light-theme);
+}
+
+body.dark {
+  @include mat.all-component-colors($dark-theme);
+}
+
+/* =========================================================
+   TYPOGRAPHY FIX
+========================================================= */
+
+html,
+body {
+  font-family: "Segoe UI", system-ui, sans-serif !important;
+}
+
+/* FORZAR MDC COMPONENTS (evita Roboto residual) */
+.mat-mdc-button,
+.mat-mdc-input-element,
+.mat-mdc-form-field,
+.mat-mdc-dialog-container,
+.mat-mdc-menu-content,
+.mat-mdc-select,
+.mat-mdc-option,
+.mat-mdc-table {
+  font-family: inherit !important;
+}
+
+/* =========================================================
+   DESIGN TOKENS
+========================================================= */
+:root {
+
+  /* SURFACES */
+  --mat-sys-surface: var(--color-sand-50);
+  --mat-sys-surface-container: var(--color-sand-100);
+  --mat-sys-surface-container-high: var(--color-sand-200);
+
+  /* PRIMARY */
+  --mat-sys-primary: var(--color-brick-light);
+  --mat-sys-on-primary: var(--color-sand-50);
+
+  /* ERROR */
+  --mat-sys-error: var(--color-sand-red);
+  --mat-sys-on-error: var(--color-sand-975);
+
+  /* WARNING */
+  --mat-sys-tertiary: var(--color-sand-yellow);
+  --mat-sys-on-tertiary: var(--color-sand-900);
+
+  /* INPUTS */
+  --mdc-filled-text-field-container-color: var(--color-sand-300);
+  --mdc-filled-text-field-input-text-color: var(--color-sand-975);
+}
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+body.dark {
+
+  --mat-sys-surface: var(--color-sand-900);
+  --mat-sys-surface-container: var(--color-sand-800);
+  --mat-sys-surface-container-high: var(--color-sand-950);
+
+  --mat-sys-primary: var(--color-brick-dark);
+
+  --mat-sys-error: var(--color-sand-red-dark);
+
+  --mat-sys-tertiary: var(--color-sand-yellow-dark);
+
+  --mdc-filled-text-field-container-color: var(--color-sand-900);
+  --mdc-filled-text-field-input-text-color: var(--color-sand-100);
+}
